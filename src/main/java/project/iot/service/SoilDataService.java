@@ -31,8 +31,10 @@ public class SoilDataService {
 
     public void saveSoilDataFromLoRaWan() {
         String loRaWanOutPut = soilDataPrivateController.getSoilMoistureInfos(getSearchDate());
-        String jsonString = convertMultipleRootElementToValidJson(loRaWanOutPut);
-        getObjectFromJson(jsonString);
+        if (!(loRaWanOutPut == null)) {
+            String jsonString = convertMultipleRootElementToValidJson(loRaWanOutPut);
+            getObjectFromJson(jsonString);
+        }
     }
 
     private Instant getSearchDate() {
