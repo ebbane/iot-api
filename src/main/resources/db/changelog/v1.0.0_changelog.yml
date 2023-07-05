@@ -17,7 +17,7 @@ databaseChangeLog:
                   name: timestamp
                   type: "timestamp with time zone"
               - column:
-                  name: temperatures
+                  name: value
                   type: real
               - column:
                   name: sender

@@ -8,13 +8,21 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 import project.iot.properties.MqttProperties;
+import project.iot.service.TempService;
 
 @Component
 public class MqttSubscriber implements MqttCallback, ApplicationRunner {
     Logger logger = LoggerFactory.getLogger(MqttSubscriber.class);
 
+    private final TempService tempService;
+
     @Autowired
     MqttProperties mqttProperties;
+
+    public MqttSubscriber(TempService tempService, MqttProperties mqttProperties) {
+        this.tempService = tempService;
+        this.mqttProperties = mqttProperties;
+    }
 
     @Override
     public void run(ApplicationArguments args) {
@@ -35,6 +43,7 @@ public class MqttSubscriber implements MqttCallback, ApplicationRunner {
     @Override
     public void messageArrived(String topic, MqttMessage message) throws Exception {
         logger.info("Received message on topic '" + topic + "': " + new String(message.getPayload()));
+        tempService.saveTemperature(new String(message.getPayload()));
 
     }
 
