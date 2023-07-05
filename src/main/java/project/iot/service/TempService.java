@@ -16,13 +16,13 @@ public class TempService {
     private final TempRepository tempRepository;
     private static final TempMapper tempMapper = new TempMapper();
     public void saveTemperature (TempCreateRequest request) {
-        save(request.getValue());
+        save(request.getValue(), SenderType.HTTP);
     }
     public void saveTemperature (String value) {
-        save(value);
+        save(value, SenderType.MQTT);
     }
-    private void save(String temp) {
-        Temperature temperatureToSave = tempMapper.toTemperature(temp, SenderType.HTTP);
+    private void save(String temp, SenderType type) {
+        Temperature temperatureToSave = tempMapper.toTemperature(temp, type);
         tempRepository.save(temperatureToSave);
     }
     public TemperatureResponse getEsp32Temperature(){
