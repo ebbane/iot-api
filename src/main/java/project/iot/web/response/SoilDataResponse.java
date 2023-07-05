@@ -4,7 +4,7 @@ import java.util.List;
 
 public class SoilDataResponse {
     private List<SoilMoistureResponse> soilMoistures;
-    private List<TempSoilResponse> tempSoils;
+    private List<TemperatureResponse> tempSoils;
     private List<ConductSoilResponse> conductSoils;
 
     public List<SoilMoistureResponse> getSoilMoistures() {
@@ -15,11 +15,11 @@ public class SoilDataResponse {
         this.soilMoistures = soilMoistures;
     }
 
-    public List<TempSoilResponse> getTempSoils() {
+    public List<TemperatureResponse> getTempSoils() {
         return tempSoils;
     }
 
-    public void setTempSoils(List<TempSoilResponse> tempSoils) {
+    public void setTempSoils(List<TemperatureResponse> tempSoils) {
         this.tempSoils = tempSoils;
     }
 

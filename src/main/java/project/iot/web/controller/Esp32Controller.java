@@ -7,6 +7,7 @@ import project.iot.service.Esp32Service;
 import project.iot.service.TempService;
 import project.iot.web.request.TempCreateRequest;
 import project.iot.web.response.ConfigResponse;
+import project.iot.web.response.Esp32TemperatureResponse;
 
 import javax.validation.Valid;
 
@@ -26,6 +27,11 @@ public class Esp32Controller {
     @RequestMapping(method = RequestMethod.GET, value = "/api/v1/esp32/config", produces = MediaType.APPLICATION_JSON_VALUE)
     public ConfigResponse getConfig() {
         return esp32Service.getConfig();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/api/v1/esp32/temperature", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Esp32TemperatureResponse getEspTemperature() {
+        return tempService.getEsp32Temperature();
     }
 
 }

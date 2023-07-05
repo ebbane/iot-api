@@ -2,14 +2,14 @@ package project.iot.mapper;
 
 import project.iot.model.SenderType;
 import project.iot.model.Temperature;
-import project.iot.web.request.TempCreateRequest;
+import project.iot.web.response.Esp32TemperatureResponse;
 import project.iot.web.response.TemperatureResponse;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class TempMapper {
     public Temperature toTemperature(String value, SenderType senderType) {
@@ -20,14 +20,18 @@ public class TempMapper {
         return temperature;
     }
 
-    public TemperatureResponse toResponse(List<Temperature> temperatures) {
-        TemperatureResponse response = new TemperatureResponse();
-        Map<Instant, Float> temperatureMap = new HashMap<>();
+    public Esp32TemperatureResponse toResponse(List<Temperature> temperatures) {
+        Esp32TemperatureResponse esp32TemperatureResponse = new Esp32TemperatureResponse();
+        List<TemperatureResponse> temperatureResponses = new ArrayList<>();
         for (Temperature temperature : temperatures) {
-            temperatureMap.put(temperature.getTimestamp(), temperature.getValue());
+            TemperatureResponse response = new TemperatureResponse(
+                    temperature.getValue(),
+                    temperature.getTimestamp()
+            );
+            temperatureResponses.add(response);
         }
-        response.setTemperatures(temperatureMap);
-        return response;
+        esp32TemperatureResponse.setTemperatures(temperatureResponses);
+        return esp32TemperatureResponse;
     }
 
 }

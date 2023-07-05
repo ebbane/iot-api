@@ -7,7 +7,7 @@ import project.iot.model.SenderType;
 import project.iot.model.Temperature;
 import project.iot.repository.TempRepository;
 import project.iot.web.request.TempCreateRequest;
-import project.iot.web.response.TemperatureResponse;
+import project.iot.web.response.Esp32TemperatureResponse;
 
 @Service
 @AllArgsConstructor
@@ -25,7 +25,7 @@ public class TempService {
         Temperature temperatureToSave = tempMapper.toTemperature(temp, type);
         tempRepository.save(temperatureToSave);
     }
-    public TemperatureResponse getEsp32Temperature(){
+    public Esp32TemperatureResponse getEsp32Temperature(){
         return tempMapper.toResponse(tempRepository.findAll());
     }
 }

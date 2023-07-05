@@ -6,7 +6,7 @@ import project.iot.model.SoilData;
 import project.iot.web.response.ConductSoilResponse;
 import project.iot.web.response.SoilDataResponse;
 import project.iot.web.response.SoilMoistureResponse;
-import project.iot.web.response.TempSoilResponse;
+import project.iot.web.response.TemperatureResponse;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class SoilMapper {
     public SoilDataResponse toResponse(List<SoilData> datas) {
         SoilDataResponse soilDataResponse = new SoilDataResponse();
         List<SoilMoistureResponse> soilMoistures = new ArrayList<>();
-        List<TempSoilResponse> tempSoils = new ArrayList<>();
+        List<TemperatureResponse> tempSoils = new ArrayList<>();
         List<ConductSoilResponse> conductSoils = new ArrayList<>();
 
         datas.forEach(soilData -> {
@@ -41,11 +41,11 @@ public class SoilMapper {
             );
             soilMoistures.add(soilMoistureResponse);
 
-            TempSoilResponse tempSoilResponse = new TempSoilResponse(
+            TemperatureResponse temperatureResponse = new TemperatureResponse(
                     soilData.getTempSoil(),
                     soilData.getTimestamp()
             );
-            tempSoils.add(tempSoilResponse);
+            tempSoils.add(temperatureResponse);
 
             ConductSoilResponse conductSoilResponse = new ConductSoilResponse(
                     soilData.getConductSoil(),
